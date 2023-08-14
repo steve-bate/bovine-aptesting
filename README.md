@@ -1,9 +1,9 @@
 <!-- TODO Update bovine documentation -->
 # bovine-aptesting
 
-Experimental extension of the [activitypub-testsuite](https://github.com/steve-bate/activitypub-testsuite) for testing [bovine.pub](https://codeberg.org/helge/bovine/).
+Experimental extension of the [activitypub-testsuite](https://github.com/steve-bate/activitypub-testsuite) for testing [bovine](https://codeberg.org/helge/bovine/).
 
-This repository contains bovine.pub-specific code and configuration. The test framework starts a Node.js subprocess at the beginning of a test session. Before each test, a custom test reset API is called to reset the bovine.pub database.
+This repository contains bovine-specific code and configuration. The test framework starts a Node.js subprocess at the beginning of a test session. Before each test, a custom test reset API is called to reset the bovine database.
 
 ## Install
 
@@ -35,7 +35,7 @@ git clone --recurse-submodules https://github.com/steve-bate/bovine-aptesting
 ```
 
 > [!NOTE]
-> The bovine.pub submodule is currently a test-related branch of my `bovine` fork. This branch contains several patches to fix issues and add some test-related endpoint (which are subject to change). This project will eventually be using the primary, authoritative repository.
+> The bovine submodule is currently a test-related branch of my `bovine` fork. This branch contains several patches to fix issues and add some test-related endpoint (which are subject to change). This project will eventually be using the primary, authoritative repository.
 
 At this point, the directory structure should look similar to the following one.
 
