@@ -35,7 +35,7 @@ git clone --recurse-submodules https://github.com/steve-bate/bovine-aptesting
 ```
 
 > [!NOTE]
-> The bovine.pub submodule is currently a test-related branch of my `bovine.pub` fork. This branch contains several patches to fix issues and add some test-related endpoint (which are subject to change). This project will eventually be using the primary, authoritative repository.
+> The bovine.pub submodule is currently a test-related branch of my `bovine` fork. This branch contains several patches to fix issues and add some test-related endpoint (which are subject to change). This project will eventually be using the primary, authoritative repository.
 
 At this point, the directory structure should look similar to the following one.
 
@@ -45,11 +45,11 @@ testing
   ├── bovine-aptesting
 ```
 
-4. Change to the `bovine-aptesting` directory and install it. This will do the Python (Poetry) install and run `npm init` in the `bovine.pub` submodule (the code being tested).
+1. Change to the `bovine-aptesting` directory and install it.
 
 ```
 cd bovine-aptesting
-sh install.sh
+poetry install
 ```
 
 ## Usage
