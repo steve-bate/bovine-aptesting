@@ -1,0 +1,4 @@
+[submodule "submodules/bovine"]
+	path = submodules/bovine
+	url = https://codeberg.org/steve-bate/bovine.git
+	branch = steve-bate/testing
