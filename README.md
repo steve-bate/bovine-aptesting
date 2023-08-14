@@ -1,7 +1,7 @@
 <!-- TODO Update bovine documentation -->
 # bovine-aptesting
 
-Experimental extension of the [activitypub-testsuite](https://github.com/steve-bate/activitypub-testsuite) for testing [bovine.pub](https://github.com/evanp/bovine.pub).
+Experimental extension of the [activitypub-testsuite](https://github.com/steve-bate/activitypub-testsuite) for testing [bovine.pub](https://codeberg.org/helge/bovine/).
 
 This repository contains bovine.pub-specific code and configuration. The test framework starts a Node.js subprocess at the beginning of a test session. Before each test, a custom test reset API is called to reset the bovine.pub database.
 
