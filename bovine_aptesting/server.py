@@ -8,11 +8,11 @@ os.environ["BOVINE_CONTEXT_CACHE"] = os.path.join(
 # Environment must be set up before imports
 # ruff: noqa: E402
 
-import sys
 
 from bovine_herd import bovine_herd
 from bovine_store import register
 from bovine_store.models import (
+    BovineActorEndpoint,
     BovineActorKeyPair,
     CollectionItem,
     StoredJsonObject,
@@ -22,14 +22,16 @@ from quart import Quart
 
 
 class BovineServer:
-    def __init__(self, server_port):
+    def __init__(self, server_port: int, use_disk: bool):
         self.server_port = server_port
         self.registered = False
+        self.use_disk = use_disk
 
     def run(self):
         app = Quart(__name__)
 
-        os.environ["BOVINE_DB_URL"] = "sqlite://:memory:"
+        if not self.use_disk:
+            os.environ["BOVINE_DB_URL"] = "sqlite://:memory:"
 
         bovine_herd(app)
 
@@ -45,7 +47,8 @@ class BovineServer:
                     suffix = name
                 return f"http://localhost:{self.server_port}/endpoints/{suffix}"
 
-            await register(name, None, ep)
+            # await register(name, None, ep)
+            await register(name, f"http://localhost:{self.server_port}/endpoints/")
 
         @app.get("/test/reset")
         async def test_reset():
@@ -54,14 +57,24 @@ class BovineServer:
             await VisibleTo.all().delete()
             return "OK"
 
-        @app.get("/test/private_key")
-        async def get_private_key():
+        @app.get("/test/actor_info")
+        async def get_actor_info():
             key_pair = await BovineActorKeyPair.get_or_none(name="serverKey")
-            return key_pair.private_key
+            actor_ep = await BovineActorEndpoint.get_or_none(stream_name="ACTOR")
+            return {
+                "uri": actor_ep.name,
+                "private_key": key_pair.private_key,
+            }
 
         app.run(port=self.server_port)
 
 
 if __name__ == "__main__":
-    server = BovineServer(int(sys.argv[1]) if len(sys.argv) > 1 else 50000)
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--port", type=int, default=50000)
+    parser.add_argument("--use-disk", action="store_true")
+    args = parser.parse_args()
+    server = BovineServer(args.port, args.use_disk)
     server.run()

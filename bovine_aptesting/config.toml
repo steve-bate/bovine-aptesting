@@ -124,3 +124,7 @@ bug = true
 [test_actor_blocking]
 skip = "Blocking doesn't seem to work. Needs investigation."
 bug = true
+
+[test_nodeinfo]
+skip = "Incorrect URL (forces https)"
+bug = true

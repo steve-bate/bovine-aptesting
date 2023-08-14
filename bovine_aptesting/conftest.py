@@ -53,7 +53,7 @@ def server_subprocess_config(
     server_test_directory, local_server_port
 ) -> ServerSubprocessConfig:  # noqa: F405
     return ServerSubprocessConfig(  # noqa: F405
-        args=["python", "server.py", str(local_server_port)],
+        args=["python", "server.py", "--port", str(local_server_port)],
         cwd=os.path.join(server_test_directory),
         start_matcher=lambda line: "Running on" in line,
         error_matcher=lambda line: "Traceback" in line,

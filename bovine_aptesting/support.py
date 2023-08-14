@@ -23,12 +23,10 @@ class BovineServerTestSupport(HttpxServerTestSupport):
         if actor_name is not None:
             pytest.skip("Single actor instance")
         # Need to create an authenticdated remote actor to get the local actor profile
-        remote_actor = self.request.getfixturevalue("remote_actor")
-        profile = remote_actor.get_json(
-            f"{self.local_base_url}/endpoints/local_actor_1"
-        )
-        response = httpx.get(f"{self.local_base_url}/test/private_key")
+        response = httpx.get(f"{self.local_base_url}/test/actor_info")
         response.raise_for_status()
-        private_key = response.text
-        auth = HTTPSignatureAuth(profile["publicKey"]["id"], private_key)
+        actor_info = response.json()
+        remote_actor = self.request.getfixturevalue("remote_actor")
+        profile = remote_actor.get_json(actor_info["uri"])
+        auth = HTTPSignatureAuth(profile["publicKey"]["id"], actor_info["private_key"])
         return BovineLocalActor(self, profile, auth=auth)
