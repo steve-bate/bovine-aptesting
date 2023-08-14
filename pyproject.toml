@@ -10,9 +10,9 @@ packages = [{ include = "bovine_aptesting" }]
 python = "^3.11"
 activitypub-testsuite = { path = "../activitypub-testsuite", develop = true }
 quart = "^0.18.4"
-bovine = { path = "../../../repos/bovine/bovine", develop = true }
-bovine-herd = {path = "../../../repos/bovine/bovine_herd", develop = true}
-bovine-store = {path = "../../../repos/bovine/bovine_store", develop = true}
+bovine = { path = "submodules/bovine/bovine", develop = true }
+bovine-store = { path = "submodules/bovine/bovine_store", develop = true }
+bovine-herd = { path = "submodules/bovine/bovine_herd", develop = true }
 
 
 [[tool.poetry.source]]
@@ -39,7 +39,7 @@ profile = "black"
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-addopts = ["-W", "ignore::DeprecationWarning"]
+addopts = ["-W", "ignore::DeprecationWarning", "--ignore", "submodules"]
 markers = [
     "ap_reqlevel: ActivityPub requirements level",
     "ap_capability: ActivityPub/AS2 capability required for test",
