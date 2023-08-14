@@ -1,0 +1,126 @@
+[server.capabilities]
+# C2S
+c2s.default = true
+# c2s.outbox.default = true
+# c2s.outbox.get = true
+# c2s.outbox.post = true
+# c2s.outbox.post.Create = true
+# c2s.outbox.post.Update = true
+# c2s.outbox.post.Delete = true
+# c2s.outbox.post.Follow = true
+c2s.outbox.post.Add = false
+c2s.outbox.post.Remove = false
+# c2s.outbox.post.Like = true
+# c2s.outbox.post.Block = true
+# c2s.outbox.post.Undo = true
+
+# S2S
+s2s.default = true
+# s2s.inbox.default = true
+# s2s.inbox.get = true
+# s2s.inbox.post = true
+# s2s.inbox.post.Create = true
+# s2s.inbox.post.Update = true
+# s2s.inbox.post.Delete = true
+# s2s.inbox.post.Follow = true
+# s2s.inbox.post.Accept = true
+# s2s.inbox.post.Reject = true
+# s2s.inbox.post.Add = true
+# s2s.inbox.post.Remove = true
+# s2s.inbox.post.Like = true
+# s2s.inbox.post.Announce = true
+# s2s.inbox.post.Undo = true
+# s2s.inbox.shared = true
+
+# Collections support - both spec'ed and custom
+# collections.default = true
+collections.liked = false
+collections.followers = false
+collections.following = false
+collections.custom = false
+
+# Other AP featuress
+# tombstones = true
+# Some AP servers don't support standard audience processing
+# audience = false
+
+# Other non-AP features
+webfinger = true
+nodeinfo = true
+x-nodeinfo2 = false
+host-meta = true
+portable_contacts = false # poco
+robots_txt = false
+
+#
+# Test Configurations
+#
+
+[test_remote_dereference]
+skip = "Doesn't dereference object URI"
+bug = true
+
+[test_activity_with_multiple_actors]
+skip = "Causes exception"
+
+[test_activity_with_multiple_objects]
+skip = "Causes exception"
+
+[test_get_actor_allowed]
+skip = "Requires auth to get actor profile"
+
+[test_outbox_delete]
+skip = "Returns 200 status code"
+bug = true
+
+[test_outbox_partial_update]
+skip = "Not clear yet what's happening (looks like a bug)"
+bug = true
+
+[test_outbox_create_sets_attributedTo.with_actor]
+skip = "attributedTo not set"
+bug = true
+
+[test_outbox_create_sets_attributedTo.without_actor]
+skip = "attributedTo not set"
+bug = true
+
+[test_outbox_create_merges_recipients]
+skip = true
+bug = true
+
+[test_outbox_requires_object_for_certain_activities.Create-without_object]
+skip = "Doesn't return error-related HTTP status"
+bug = true                                        # ?
+
+[test_outbox_requires_object_for_certain_activities.Follow-without_object]
+skip = "Doesn't return error-related HTTP status"
+bug = true                                        # ?
+
+[test_outbox_requires_object_for_certain_activities.Like-without_object]
+skip = "Doesn't return error-related HTTP status"
+bug = true                                        # ?
+
+[test_outbox_requires_object_for_certain_activities.Block-without_object]
+skip = "Doesn't return error-related HTTP status"
+bug = true                                        # ?
+
+[test_outbox_requires_object_for_certain_activities.Undo-without_object]
+skip = "Doesn't return error-related HTTP status"
+bug = true                                        # ?
+
+[test_outbox_wraps_object_and_copies_recipients]
+skip = "Seems to return URI of object, not activity"
+bug = true
+
+[test_inbox_post_bad_media_type]
+skip = "Causes server exception"
+bug = true
+
+[test_inbox_accept_deduplicate]
+skip = "Doesn't deduplicate the inbox identifiers"
+bug = true
+
+[test_actor_blocking]
+skip = "Blocking doesn't seem to work. Needs investigation."
+bug = true
