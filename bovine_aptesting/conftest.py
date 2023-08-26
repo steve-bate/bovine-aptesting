@@ -53,7 +53,12 @@ def server_subprocess_config(
     server_test_directory, local_server_port
 ) -> ServerSubprocessConfig:  # noqa: F405
     return ServerSubprocessConfig(  # noqa: F405
-        args=["python", "server.py", "--port", str(local_server_port)],
+        args=[
+            "python",
+            os.path.join(server_test_directory, "server.py"),
+            "--port",
+            str(local_server_port),
+        ],
         cwd=os.path.join(server_test_directory),
         start_matcher=lambda line: "Running on" in line,
         error_matcher=lambda line: "Traceback" in line,
@@ -65,14 +70,3 @@ def reset_local_server_state(local_base_url):
     print("reset local server data")
     response = httpx.get(f"{local_base_url}/test/reset")
     response.raise_for_status()
-
-
-# @pytest.fixture(autouse=True)
-# def reset_server_store(local_base_url, local_server_subprocess):
-#     # local_server_subprocess is referenced to ensure proper autouse startup order
-#     response = httpx.get(f"{local_base_url}/test/reset", timeout=None, verify=False)
-#     response.raise_for_status()
-
-#
-# Bovine test server setup
-#

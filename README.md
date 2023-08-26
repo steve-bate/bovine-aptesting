@@ -3,8 +3,10 @@
 
 Experimental extension of the [activitypub-testsuite](https://github.com/steve-bate/activitypub-testsuite) for testing [bovine](https://codeberg.org/helge/bovine/).
 
-This repository contains bovine-specific code and configuration. The test framework starts a Node.js subprocess at the beginning of a test session. Before each test, a custom test reset API is called to reset the bovine database.
+This repository contains bovine-specific code and configuration. The test framework starts a Python subprocess at the beginning of a test session. The server main is in `server.py`. This sets up an in-memory database and adds a test reset endpoint. Before each test, the test reset action is invoked to reset the bovine database.
 
+> [!NOTE]
+> At the time this test suite was created, the bovine code was changing frequently. There's a good chance the test suite will not run with the current version of bovine (without some changes).
 ## Install
 
 ### Requirements

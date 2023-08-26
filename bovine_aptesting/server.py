@@ -9,7 +9,7 @@ os.environ["BOVINE_CONTEXT_CACHE"] = os.path.join(
 # ruff: noqa: E402
 
 
-from bovine_herd import bovine_herd
+from bovine_herd import BovineHerd
 from bovine_store import register
 from bovine_store.models import (
     BovineActorEndpoint,
@@ -18,6 +18,7 @@ from bovine_store.models import (
     StoredJsonObject,
     VisibleTo,
 )
+from bovine_store.server import BovineStoreManager
 from quart import Quart
 
 
@@ -30,10 +31,8 @@ class BovineServer:
     def run(self):
         app = Quart(__name__)
 
-        if not self.use_disk:
-            os.environ["BOVINE_DB_URL"] = "sqlite://:memory:"
-
-        bovine_herd(app)
+        BovineStoreManager(app, db_url="sqlite://:memory:")
+        BovineHerd(app)
 
         @app.before_serving
         async def register_local_actor():
