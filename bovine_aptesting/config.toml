@@ -73,7 +73,7 @@ xfail = "Seems to fail because of not defeferencing URI"
 bug = true
 
 [test_remote_dereference]
-# xfail = "Doesn't dereference object URI in reply_handler"
+xfail = "(fix in fork) Doesn't dereference object URI in reply_handler"
 bug = true
 reported = "https://codeberg.org/bovine/bovine/issues/35"
 

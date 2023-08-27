@@ -39,7 +39,7 @@ def pytest_configure():
 @pytest.fixture
 def instance_metadata():
     return {
-        "name": "bovine",
+        "software": "bovine",
     }
 
 
