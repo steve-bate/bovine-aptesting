@@ -64,9 +64,17 @@ bug = true
 xfail = "Doesn't map the IRI"
 bug = true
 
-[test_multityped_activity_is_delivered]
+[test_multityped_activity_is_delivered_to_inbox]
 xfail = "Unhashable list error"
+
+[test_multityped_activity_is_delivered_to_outbox]
+xfail = "Internal server error"
 bug = true
+
+[test_multityped_object_is_delivered_to_outbox]
+xfail = "Internal server error"
+bug = true
+
 
 [test_dont_map_iris_for_ids]
 xfail = "Seems to fail because of not defeferencing URI"
